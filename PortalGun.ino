@@ -13,7 +13,7 @@ int brightnessPin = 3;
 int potValue = 0;
 int triggerValue = 0;
 
-boolean frontInitialized = false;
+boolean triggerDown = false;
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
@@ -37,15 +37,12 @@ void setup() {
   resetPixels();
 }
 
-void changeFront() { 
-  int g = 225;
-  if(frontInitialized == false) {
+void changeFront() {
+    if(button
     for(int x = 6; x < 9; x++) {
-      int g1 = g-random(0,50);
-      pixels.setPixelColor(x,0,g1, 0);
+      pixels.setPixelColor(x,0,255, 0);
     }
     pixels.show();
-    frontInitialized = true;
   }
    
   if(random(0, 1000) < 50) {
@@ -71,6 +68,11 @@ void checkTrigger() {
   triggerValue = digitalRead(triggerPin);
   Serial.print("triggerValue============== ");
   Serial.println(triggerValue);
+  if(triggerValue ==  1) {
+    triggerDown = true;
+  } else {
+    triggerDown = false;
+  }
 }
 
 void changePlasma() {  
