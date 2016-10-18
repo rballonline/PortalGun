@@ -1,7 +1,7 @@
 #include <LiquidCrystal.h>
 #include <LCDKeypad.h>
 #include <Adafruit_NeoPixel.h>
-#include "Timer.h"
+#include "Timer.h" // https://github.com/JChristensen/Timer
 #define NUMPIXELS     10
 #define PIN            3
 
@@ -35,23 +35,6 @@ void setup() {
   
   pixels.begin(); // This initializes the NeoPixel library.
   resetPixels();
-}
-
-void changeFront() {
-    if(button
-    for(int x = 6; x < 9; x++) {
-      pixels.setPixelColor(x,0,255, 0);
-    }
-    pixels.show();
-  }
-   
-  if(random(0, 1000) < 50) {
-    for(int x = 6; x < 9; x++) {
-      int g1 = g-random(0,50);
-      pixels.setPixelColor(x,0,g1, 0);
-    }
-    pixels.show();
-  }
 }
 
 void checkBrightness() { 
@@ -122,5 +105,20 @@ void resetPixels() {
     pixels.setPixelColor(i, pixels.Color(0,0,0)); // Moderately bright green color.
   }
   pixels.show(); // This sends the updated pixel color to the hardware.
+}
+
+void changeFront() {
+    for(int x = 6; x < 9; x++) { // change the front 3 lights
+      pixels.setPixelColor(x,0,255, 0);
+    }
+    pixels.show();
+     
+  if(random(0, 1000) < 50) {
+    for(int x = 6; x < 9; x++) {
+      int g1 = random(0,50);
+      pixels.setPixelColor(x,0,g1, 0);
+    }
+    pixels.show();
+  }
 }
 
